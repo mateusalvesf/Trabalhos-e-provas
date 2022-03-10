@@ -33,3 +33,57 @@ order by create_date desc
 ---Ou use este comando
 SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
 WHERE TABLE_NAME = 'Professor'
+
+alter table professores 
+add
+	constraint cn_titulacao_salario check
+(	
+	(titulacao ='graduado' and salario < 1000)
+	OR
+	(titulacao <> 'graduado')
+)
+
+update professores set salario =750
+
+insert into Professores (rg,sexo,idade,titulacao,categoria,salario,nome,cidade)
+values
+	(101020,'F',40,'GRADUADO','TITULAR',900,'ANA','RIBEIRAO PRETO')
+insert into Professores (rg,sexo,idade,titulacao,categoria,salario,nome,cidade)
+values
+	(111020,'F',40,'GRADUADO','TITULAR',900,'JOANA','RIBEIRAO PRETO')
+
+
+create database TB_CLIENTE
+go
+use TB_CLIENTE
+
+CREATE TABLE TB_CLIENTE(
+	codCliente int  primary key identity(1,1) NOT NULL,
+	nome varchar(50) NOT NULL,
+	telefone varchar(20)NOT NULL,
+	tipo_cliente varchar(20)NOT NULL check (tipo_cliente in
+				('Titular', 'Dependente')) ,
+	dt_cadastro datetime constraint pkdate default (getdate()) NOT NULL,
+	nr_dependetes int NOT NULL,
+
+	
+	)
+
+alter table TB_CLIENTE
+add
+	constraint nr_dependetes check
+(	
+	(nr_dependetes >=0 and nr_dependetes <=3)
+	
+)
+
+
+alter table TB_CLIENTE
+add
+	constraint nr_dependetes check
+(	
+	(nr_dependetes >=0 and nr_dependetes <=3)
+	
+)
+alter table TB_CLIENTE
+drop constraint nr_dependetes

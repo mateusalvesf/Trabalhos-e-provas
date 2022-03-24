@@ -1,0 +1,55 @@
+
+
+create database empresa
+go
+use empresa
+
+cidade default franca
+razao scoial obrigatoio
+uf so de sp mg ou rj
+CREATE TABLE Fabricante(
+	cod_fabricante int constraint pk_fab  primary key identity(1,1),
+	razao_social varchar(50) NOT NULL,
+	cidade varchar(20)constraint df_cidade default('Franca'),
+	uf varchar(20) Constraint df_uf check (uf in
+				('SP','MG'))
+
+	)
+
+	descricao obrigatorio
+	campo para guardar estoque produtos sempre positivo
+	preco produto smpre maior q zero
+	por chave estrangeira marca
+CREATE TABLE Produto(
+	cod_produto int constraint pk_pro  primary key identity(1,1),
+	descricao varchar(50) NOT NULL,
+	preco varchar(20) constraint chk_pre check(preco >0) ,
+	
+	)
+
+	statis ativo ou inativo
+	codigo categoria 3 digitos
+CREATE TABLE Categoria(
+	cod_cat int constraint pk_cat  primary key identity(999,1) ,
+	descricao varchar(50) ,
+	status_ varchar(20)Constraint df_status check (status_ in
+				('Ativo','Inativo'))
+
+	)
+
+CREATE TABLE TB_CLIENTE(
+	cod_marca int constraint pk_mar  primary key identity(500,1),
+	nome varchar(50) NOT NULL,
+	
+
+
+	)
+
+	viewp produto categoria nome cidade frabricante
+
+	select 
+	Categoria*,cod_produto,
+
+	from
+	Fabricante as F inner join Produto as P on  cod_fabricante=cod_fabricante
+					inner join Categoria as C on cod_cat=cod_cat 
